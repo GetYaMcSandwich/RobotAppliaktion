@@ -47,21 +47,30 @@ class RobotHelper {
     }
 
     fun sayAsync(qiContext: QiContext, content: String): Future<*>? {
+
         return try {
+
             val sayText = "\\rspd=90\\$content"
+
             Log.d(TAG, "SayAsync text: $sayText")
 
             val phrase = Phrase(sayText)
+
             val say = SayBuilder.with(qiContext)
                 .withPhrase(phrase)
                 .withLocale(getQiLocale(qiContext.getLocaleConfiguration()))
                 .build()
 
             say.async().run()
+
         } catch (ignored: Exception) {
+
             Log.d(TAG, "SayAsync failed")
+
             null
+
         }
+
     }
 
     private fun buildAnimate(qiContext: QiContext, resource: Int): Animate? {
@@ -101,6 +110,8 @@ class RobotHelper {
             null
         }
     }
+
+
 
     fun animateWithSoundAsync(
         qiContext: QiContext,
@@ -142,7 +153,9 @@ class RobotHelper {
         }
     }
 
+
     companion object {
         private const val TAG = "RobotHelper"
     }
+
 }
